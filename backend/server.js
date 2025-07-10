@@ -10,7 +10,7 @@ import userRoute from './routes/userRoutes.js'
 
 const app =express()
 const port = process.env.PORT || 4000
-connectDB()
+await connectDB()
 connectToCloudinary()
 // middlewares
 
