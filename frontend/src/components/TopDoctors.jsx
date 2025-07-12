@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import { LifeLine } from "react-loading-indicators";
 
 const TopDoctors = () => {
   const navigate = useNavigate();
@@ -12,7 +13,16 @@ const TopDoctors = () => {
       <p className=" text-sm sm:w-1/3 text-center">
         Simply browse through our extensive list of trusted doctors
       </p>
-      {doctors ? (
+      {doctors && doctors.length === 0 ? (
+        <div>
+          <LifeLine
+            color="#5f6fff"
+            size="large"
+            text="Loading doctors..."
+            textColor="#5f6fff"
+          />
+        </div>
+      ) : (
         <div className=" w-full grid grid-cols-auto gap-4 pt-5 px-3 sm:px-0">
           {doctors.slice(0, 10).map((item, index) => {
             return (
@@ -36,8 +46,6 @@ const TopDoctors = () => {
             );
           })}
         </div>
-      ) : (
-        <LifeLine color="#5f6fff" size="medium" text="" textColor="" />
       )}
       <button
         onClick={() => {
